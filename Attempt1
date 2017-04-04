@@ -1,0 +1,14 @@
+/**Sample SQL Query for fetching the basic data
+select j3.encounter_id,j1.patient_id,j1.patient_type_id,j6.patient_type_desc,
+j1.age_in_years,j4.gender,j3.antimicrobial_id,j5.antimicrobial_desc,j7.medication_id,
+j8.generic_name,j8.route_description,j8.dose_form_description
+from healthfacts_raw.hf_f_encounter j1
+inner join healthfacts_raw.hf_f_diagnosis j2 on j1.encounter_id = j2.encounter_id
+inner join healthfacts_raw.hf_f_micro_susceptibility j3 on j3.encounter_id = j2.encounter_id
+inner join healthfacts_raw.hf_d_patient j4 on j1.patient_id=j4.patient_id
+inner join healthfacts_raw.hf_d_antimicrobial j5 on j5.antimicrobial_id=j3.antimicrobial_id
+inner join healthfacts_raw.hf_d_patient_type j6 on j6.patient_type_id = j1.patient_type_id
+inner join healthfacts_raw.hf_f_medication j7 on j7.encounter_id=j1.encounter_id
+inner join healthfacts_raw.hf_d_medication j8 on j8.medication_id=j7.medication_id
+where j2.diagnosis_id= 5495 and j1.patient_id=165114982
+order by j1.age_in_years asc
